@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中药炮规系统</title>
+    <link rel="stylesheet" href="common.css">
+    <style>
+        /* 首页特有样式 */
+        main {
+            padding: 40px 30px;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .welcome-title {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .welcome-subtitle {
+            font-size: 18px;
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+
+        .auto-redirect-message {
+            font-size: 16px;
+            color: #28a745;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* 首页响应式样式 */
+        @media (max-width: 768px) {
+            main {
+                padding: 20px 15px;
+            }
+
+            .welcome-title {
+                font-size: 24px;
+            }
+
+            .welcome-subtitle {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="index.html" class="logo">中药炮规系统</a>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="dfbz.html">药材饮片</a></li>
+                    <li><a href="#">查询系统</a></li>
+                    <li><a href="#">关于我们</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <h1 class="welcome-title">欢迎使用中药炮规系统</h1>
+            <p class="welcome-subtitle">正在为您跳转到药材饮片页面...</p>
+            <p class="auto-redirect-message">如未自动跳转，请点击上方"药材饮片"菜单</p>
+        </main>
+    </div>
+
+    <script src="common.js"></script>
+    <script>
+        // 页面加载后自动跳转到dfbz页面
+        setTimeout(function() {
+            window.location.href = 'dfbz.html';
+        }, 3000); // 3秒后跳转
+    </script>
+</body>
+</html>

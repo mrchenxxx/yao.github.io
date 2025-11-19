@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VARIETY_NAME - 国家中药饮片炮制规范</title>
+    <link rel="stylesheet" href="../../common.css">
+    <style>
+        /* 页面特有样式 */
+        main {
+            padding: 40px 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #6c757d;
+        }
+
+        .breadcrumb a {
+            color: #6c757d;
+            text-decoration: none;
+            margin-right: 8px;
+        }
+
+        .breadcrumb a:hover {
+            color: #2c3e50;
+        }
+
+        .breadcrumb .separator {
+            margin: 0 8px;
+            color: #6c757d;
+        }
+
+        .breadcrumb .current {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .variety-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        .variety-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .variety-latin {
+            font-size: 18px;
+            color: #6c757d;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .variety-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .content-sections {
+            display: grid;
+            gap: 30px;
+        }
+
+        .content-section {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #6c757d;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            background: #6c757d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .section-content {
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .section-content p {
+            margin-bottom: 15px;
+        }
+
+        .section-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .process-steps {
+            display: grid;
+            gap: 20px;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #6c757d;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: #6c757d;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .step-description {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .info-value {
+            color: #6c757d;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #6c757d;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: #2c3e50;
+            transform: translateY(-2px);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            main {
+                padding: 20px 15px;
+            }
+
+            .variety-title {
+                font-size: 24px;
+            }
+
+            .variety-latin {
+                font-size: 16px;
+            }
+
+            .variety-meta {
+                gap: 15px;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 18px;
+            }
+
+            .process-step {
+                padding: 15px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-button {
+                width: 100%;
+                max-width: 200px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../../index.html" class="logo">中药炮规系统</a>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="../../index.html">首页</a></li>
+                    <li><a href="../../dfbz.html">药材饮片</a></li>
+                    <li><a href="#">查询系统</a></li>
+                    <li><a href="#">关于我们</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <!-- 面包屑导航 -->
+            <div class="breadcrumb">
+                <a href="../../index.html">首页</a>
+                <span class="separator">></span>
+                <a href="../../dfbz.html">药材饮片</a>
+                <span class="separator">></span>
+                <a href="../index.html">国家中药饮片炮制规范</a>
+                <span class="separator">></span>
+                <span class="current">VARIETY_NAME</span>
+            </div>
+
+            <!-- 品种标题 -->
+            <div class="variety-header">
+                <h1 class="variety-title">VARIETY_NAME</h1>
+                <p class="variety-latin">VARIETY_LATIN</p>
+                <div class="variety-meta">
+                    <div class="meta-item">
+                        <span>📚</span>
+                        <span>国家中药饮片炮制规范</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🏷️</span>
+                        <span>VARIETY_CATEGORY</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📅</span>
+                        <span>2023年版</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 内容区块 -->
+            <div class="content-sections">
+                <!-- 基本信息 -->
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <span class="section-icon">基</span>
+                        基本信息
+                    </h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">中文名称</div>
+                            <div class="info-value">VARIETY_NAME</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">拉丁名称</div>
+                            <div class="info-value">VARIETY_LATIN</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">药用部位</div>
+                            <div class="info-value">VARIETY_PART</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">性味归经</div>
+                            <div class="info-value">VARIETY_PROPERTY</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">功能主治</div>
+                            <div class="info-value">VARIETY_FUNCTION</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">用法用量</div>
+                            <div class="info-value">VARIETY_DOSAGE</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 炮制方法 -->
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <span class="section-icon">制</span>
+                        炮制方法
+                    </h2>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-title">净制</div>
+                                <div class="step-description">
+                                    除去杂质及非药用部位，洗净，干燥。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-title">切制</div>
+                                <div class="step-description">
+                                    洗净，润透，切厚片，干燥。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-title">炮炙</div>
+                                <div class="step-description">
+                                    VARIETY_PROCESS_DESC
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 质量标准 -->
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <span class="section-icon">质</span>
+                        质量标准
+                    </h2>
+                    <div class="section-content">
+                        <p><strong>性状：</strong>VARIETY_CHARACTER</p>
+                        <p><strong>鉴别：</strong>VARIETY_IDENTIFY</p>
+                        <p><strong>检查：</strong>VARIETY_CHECK</p>
+                        <p><strong>含量测定：</strong>VARIETY_CONTENT</p>
+                        <p><strong>性味与归经：</strong>VARIETY_PROPERTY</p>
+                        <p><strong>功能与主治：</strong>VARIETY_FUNCTION</p>
+                        <p><strong>用法与用量：</strong>VARIETY_DOSAGE</p>
+                        <p><strong>注意：</strong>VARIETY_CAUTION</p>
+                    </div>
+                </div>
+
+                <!-- 储藏要求 -->
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <span class="section-icon">储</span>
+                        储藏要求
+                    </h2>
+                    <div class="section-content">
+                        <p>VARIETY_STORAGE</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 导航按钮 -->
+            <div class="navigation-buttons">
+                <a href="../index.html" class="nav-button">
+                    ← 返回目录
+                </a>
+                <a href="#" class="nav-button" id="prevVariety">
+                    ← 上一个品种
+                </a>
+                <a href="#" class="nav-button" id="nextVariety">
+                    下一个品种 →
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../common.js"></script>
+    <script>
+        // 获取当前品种名称
+        const currentVariety = decodeURIComponent(window.location.pathname.split('/').pop().replace('.html', ''));
+        
+        // 品种数据（这里可以替换为实际的数据）
+        const varietyData = {
+            '丁香': {
+                latin: 'Caryophylli Flos',
+                category: '花类',
+                part: '花蕾',
+                property: '辛，温。归脾、胃、肺、肾经。',
+                function: '温中降逆，补肾助阳。用于脾胃虚寒，呃逆呕吐，食少吐泻，心腹冷痛，肾虚阳痿。',
+                dosage: '1～3g，内服煎汤，或入丸散。外用适量，研末调敷。',
+                processDesc: '取丁香，除去杂质，筛去灰屑。',
+                character: '略呈研棒状，长1～2cm。花冠圆球形，直径3～5mm，花瓣4，覆瓦状抱合，棕褐色至褐黄色，花瓣内为雄蕊和花柱，搓碎后可见众多黄色细粒状的花药。萼筒圆柱状，略扁，有的稍弯曲，长0.7～1.4cm，直径0.3～0.6cm，红棕色至棕褐色，上部有4枚三角状的萼片，十字状分开。质坚实，富油性。气芳香浓烈，味辛辣、有麻舌感。',
+                identify: '（1）本品粉末暗红棕色。纤维梭形，顶端钝圆，壁较厚。（2）取本品粉末0.5g，加乙醚5ml，振摇数分钟，滤过，滤液作为供试品溶液。另取丁香对照药材0.5g，同法制成对照药材溶液。照薄层色谱法试验，吸取上述两种溶液各5μl，分别点于同一硅胶G薄层板上，以石油醚（60～90℃）-乙酸乙酯（9:1）为展开剂，展开，取出，晾干，置紫外光灯（365nm）下检视。供试品色谱中，在与对照药材色谱相应的位置上，显相同颜色的荧光斑点。',
+                check: '杂质 不得过2%水分 不得过12.0%总灰分 不得过5.0%酸不溶性灰分 不得过0.5%',
+                content: '照气相色谱法测定。本品按干燥品计算，含丁香酚（C10H12O2）不得少于11.0%。',
+                caution: '不宜与郁金同用。',
+                storage: '置阴凉干燥处。'
+            },
+            '南沙参': {
+                latin: 'Adenophorae Radix',
+                category: '根类',
+                part: '根',
+                property: '甘，微寒。归肺、胃经。',
+                function: '养阴清肺，化痰益气。用于肺热燥咳，阴虚劳嗽，干咳痰黏，气阴不足，烦热口干。',
+                dosage: '9～15g。',
+                processDesc: '除去杂质，洗净，润透，切厚片，干燥。',
+                character: '呈圆锥形或圆柱形，略弯曲，偶有分枝，长7～27cm，直径0.8～3cm。表面黄白色或淡黄棕色，凹陷处常有残留棕褐色栓皮，上部多有深陷横纹，呈断续的环状，下部有纵纹及纵沟。顶端具1或2个根茎（芦头）。体轻，质松泡，易折断，断面不平坦，黄白色，多裂隙。无臭，味微甘。',
+                identify: '（1）本品粉末类白色。淀粉粒单粒类圆形，直径2～28μm，脐点点状、裂缝状或人字状；复粒由2～8分粒组成。（2）取本品粉末1g，加甲醇20ml，超声处理30分钟，滤过，滤液蒸干，残渣加水20ml使溶解，用水饱和的正丁醇振摇提取3次，每次20ml，合并正丁醇液，用水洗涤3次，每次20ml，正丁醇液蒸干，残渣加甲醇1ml使溶解，作为供试品溶液。另取南沙参对照药材1g，同法制成对照药材溶液。照薄层色谱法试验，吸取上述两种溶液各5μl，分别点于同一硅胶G薄层板上，以三氯甲烷-甲醇-水（13:7:2）的下层溶液为展开剂，展开，取出，晾干，喷以10%硫酸乙醇溶液，在105℃加热至斑点显色清晰。供试品色谱中，在与对照药材色谱相应的位置上，显相同颜色的斑点。',
+                check: '水分 不得过15.0%总灰分 不得过6.0%酸不溶性灰分 不得过2.0%',
+                content: '照紫外-可见分光光度法测定。本品按干燥品计算，含多糖以葡萄糖（C6H12O6）计，不得少于25.0%。',
+                caution: '不宜与藜芦同用。',
+                storage: '置通风干燥处，防蛀。'
+            }
+        };
+
+        // 获取当前品种数据，如果没有则使用默认值
+        const data = varietyData[currentVariety] || {
+            latin: '[拉丁学名]',
+            category: '[分类]',
+            part: '[药用部位]',
+            property: '[性味归经]',
+            function: '[功能主治]',
+            dosage: '[用法用量]',
+            processDesc: '[炮制描述]',
+            character: '[性状描述]',
+            identify: '[鉴别方法]',
+            check: '[检查项目]',
+            content: '[含量测定]',
+            caution: '[注意事项]',
+            storage: '[储藏要求]'
+        };
+
+        // 替换页面中的占位符
+        document.addEventListener('DOMContentLoaded', function() {
+            // 替换所有占位符
+            document.title = `${currentVariety} - 国家中药饮片炮制规范`;
+            
+            const elements = document.querySelectorAll('.variety-title, .breadcrumb .current');
+            elements.forEach(el => {
+                if (el.textContent.includes('VARIETY_NAME')) {
+                    el.textContent = currentVariety;
+                }
+            });
+
+            // 替换其他数据
+            const replacements = {
+                'VARIETY_LATIN': data.latin,
+                'VARIETY_CATEGORY': data.category,
+                'VARIETY_PART': data.part,
+                'VARIETY_PROPERTY': data.property,
+                'VARIETY_FUNCTION': data.function,
+                'VARIETY_DOSAGE': data.dosage,
+                'VARIETY_PROCESS_DESC': data.processDesc,
+                'VARIETY_CHARACTER': data.character,
+                'VARIETY_IDENTIFY': data.identify,
+                'VARIETY_CHECK': data.check,
+                'VARIETY_CONTENT': data.content,
+                'VARIETY_CAUTION': data.caution,
+                'VARIETY_STORAGE': data.storage
+            };
+
+            for (const [placeholder, value] of Object.entries(replacements)) {
+                const elements = document.querySelectorAll(`.variety-latin, .info-value, .step-description, .section-content p`);
+                elements.forEach(el => {
+                    if (el.textContent.includes(placeholder)) {
+                        el.textContent = el.textContent.replace(placeholder, value);
+                    }
+                });
+            }
+
+            // 设置导航高亮
+            setNavigationActive('药材饮片');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南沙参 - 国家中药饮片炮制规范</title>
+    <link rel="stylesheet" href="../../common.css">
+    <style>
+        /* 页面特有样式 */
+        main {
+            padding: 40px 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #6c757d;
+        }
+
+        .breadcrumb a {
+            color: #6c757d;
+            text-decoration: none;
+            margin-right: 8px;
+        }
+
+        .breadcrumb a:hover {
+            color: #2c3e50;
+        }
+
+        .breadcrumb .separator {
+            margin: 0 8px;
+            color: #6c757d;
+        }
+
+        .breadcrumb .current {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .variety-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        .variety-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .variety-latin {
+            font-size: 18px;
+            color: #6c757d;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .variety-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .content-sections {
+            display: grid;
+            gap: 30px;
+        }
+
+        .content-section {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #6c757d;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            background: #6c757d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .section-content {
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .section-content p {
+            margin-bottom: 15px;
+        }
+
+        .section-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .process-steps {
+            display: grid;
+            gap: 20px;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #6c757d;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: #6c757d;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .step-description {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .info-value {
+            color: #6c757d;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #6c757d;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: #2c3e50;
+            transform: translateY(-2px);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            main {
+                padding: 20px 15px;
+            }
+
+            .variety-title {
+                font-size: 24px;
+            }
+
+            .variety-latin {
+                font-size: 16px;
+            }
+
+            .variety-meta {
+                gap: 15px;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 18px;
+            }
+
+            .process-step {
+                padding: 15px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-button {
+                width: 100%;
+                max-width: 200px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../../index.html" class="logo">中药炮规系统</a>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="../../index.html">首页</a></li>
+                    <li><a href="../../dfbz.html">药材饮片</a></li>
+                    <li><a href="#">查询系统</a></li>
+                    <li><a href="#">关于我们</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <!-- 面包屑导航 -->
+            <div class="breadcrumb">
+                <a href="../../index.html">首页</a>
+                <span class="separator">></span>
+                <a href="../../dfbz.html">药材饮片</a>
+                <span class="separator">></span>
+                <a href="../index.html">国家中药饮片炮制规范</a>
+                <span class="separator">></span>
+                <span class="current">南沙参</span>
+            </div>
+
+            <!-- 品种标题 -->
+            <div class="variety-header">
+                <h1 class="variety-title">南沙参</h1>
+                <p class="variety-latin">Adenophorae Radix</p>
+                <div class="variety-meta">
+                    <div class="meta-item">
+                        <span>📚</span>
+                        <span>国家中药饮片炮制规范</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🏷️</span>
+                        <span>根类</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📅</span>
+                        <span>2023年版</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 内容区块 -->
+            <div class="content-sections">
+                <!-- 基本信息 -->
+                <div style='text-align: center;color: rgb(0, 0, 0);font-size: 14px;font-family: "'>
+    <div style='text-align: center;color: rgb(0, 0, 0);font-size: 14px;font-family: "'>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>一枝黄花</strong><br style="color: rgb(0, 0, 0);font-size: 14px;font-family: &quot;">Yizhihuɑnghuɑ</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>SOLIDAGINIS HERBA</strong></p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'>本品为菊科植物一枝黄花<em style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>******** decurrens</em> Lour.的干燥全草。秋季花果期采挖，除去泥沙，晒干。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>【性状】</strong>　本品长30～100cm。根茎短粗，簇生淡黄色细根。茎圆柱形，直径0.2～0.5cm；表面黄绿色、灰棕色或暗紫红色，有棱线，上部被毛；质脆，易折断，断面纤维性，有髓。单叶互生，多皱缩、破碎，完整叶片展平后呈卵形或披针形，长1～9cm，宽0.3～1.5cm；先端稍尖或钝，全缘或有不规则的疏锯齿，基部下延成柄。头状花序直径约0.7cm，排成总状，偶有黄色舌状花残留，多皱缩扭曲，苞片3层，卵状披针形。瘦果细小，冠毛黄白色。气微香，味微苦辛。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>【鉴别】</strong>　（1）叶表面观：上表皮细胞多角形，垂周壁略呈念珠状增厚。下表皮细胞垂周壁波状弯曲，气孔不定式，略下陷。非腺毛有两类：表皮非腺毛由3个细胞组成，壁薄，顶端1个细胞常萎缩成鼠尾状，较小；叶缘非腺毛睫毛状，由3～7个细胞组成，壁稍厚，长180～500&mu;m。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'>（2）取本品粉末2g，加石油醚（60～90℃）50ml，超声处理30分钟，放冷，滤过，弃去石油醚液，药渣挥干溶剂，加70%乙醇30ml，加热回流1小时，放冷，滤过，滤液蒸干，残渣加甲醇1ml使溶解，作为供试品溶液。另取一枝黄花对照药材2g，同法制成对照药材溶液。再取芦丁对照品，加甲醇制成每1ml含0.5mg的溶液，作为对照品溶液。照薄层色谱法（通则0502）试验，吸取供试品溶液5～10&mu;l、对照药材溶液和对照品溶液各5&mu;l，分别点于同一以含4%磷酸氢二钠溶液制备的硅胶G薄层板上，以乙酸乙酯-甲醇-甲酸-水（8∶1∶1∶1）为展开剂，展开，取出，晾干，喷以3%三氯化铝乙醇溶液，晾干，置紫外光灯（365nm）下检视。供试品色谱中，在与对照药材色谱和对照品色谱相应的位置上，显相同颜色的荧光斑点；再喷以5%三氯化铁乙醇溶液，供试品色谱中，在与对照药材色谱和对照品色谱相应的位置上，显相同颜色的斑点。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>【检查】水分</strong>　不得过13.0%（通则0832第二法）。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>总灰分</strong>　不得过8.0%（通则2302）。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>酸不溶性灰分</strong>　不得过4.0%（通则2302）。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>【浸出物】</strong>　照水溶性浸出物测定法（通则2201）项下的热浸法测定，不得少于17.0%。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>【含量测定】</strong>　照高效液相色谱法（通则0512）测定。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>色谱条件与系统适用性试验</strong>　以十八烷基硅烷键合硅胶为填充剂；以乙腈-甲醇-0.4%醋酸溶液（16∶8∶76）为流动相；检测波长为360nm。理论板数按芦丁峰计算应不低于2500。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>对照品溶液的制备</strong>　取芦丁对照品适量，精密称定，加甲醇制成每1ml含0.1mg的溶液，即得。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>供试品溶液的制备</strong>　取本品粉末（过三号筛）约2g，精密称定，置具塞锥形瓶中，精密加入70%乙醇50ml，称定重量，加热回流40分钟，放冷，再称定重量，用70%乙醇补足减失的重量，摇匀，滤过，取续滤液，即得。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>测定法</strong>　分别精密吸取对照品溶液与供试品溶液各10&mu;l，注入液相色谱仪，测定，即得。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'>本品按干燥品计算，含无水芦丁（C<sub style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>27</sub>H<sub style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>30</sub>O<sub style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>16</sub>）不得少于0.10%。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>饮片</strong></p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>【炮制】</strong>　除去杂质，喷淋清水，切段，干燥。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>【性状】</strong>　本品呈不规则的段。根茎短粗，簇生淡黄色细根。茎圆柱形，直径0.2～0.5cm；表面黄绿色、灰棕色或暗紫红色，有棱线，上部被毛；质脆，易折断，断面纤维性，有髓。叶多皱缩、破碎；先端稍尖或钝，全缘或有不规则的疏锯齿，基部下延成柄。偶有黄色舌状花残留，多皱缩扭曲，卵状披针形，瘦果细小。气微香，味微苦辛。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>【性味与归经】</strong>　辛、苦，凉。归肺、肝经。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>【功能与主治】</strong>　清热解毒，疏散风热。用于喉痹，乳蛾，咽喉肿痛，疮疖肿毒，风热感冒。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>【用法与用量】</strong>　9～15g。</p>
+        <p style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 14px;font-family: "'><strong style='color: rgb(0, 0, 0);font-size: 14px;font-family: "'>【贮藏】</strong>　置干燥处。</p>
+    </div>
+</div>
+<div style='text-align: left;color: #f5f5f5;font-size: 12px;font-family: ui-sans-serif,system-ui,sans-serif,"border: 0px solid;'>
+    <div style='color: rgba(0,0,0,.8);font-family: Inter, -apple-system, BlinkMacSystemFont, "border: 0px solid;'>
+        <div style="border: 0px solid;">
+            <div style="border: 0px solid;">
+                <div style="border: 0px solid;">
+                    <div style="border: 0px solid;">
+                        <div style="border: 0px solid;">
+                            <div style='text-align: left;color: rgb(0, 0, 0);background-color: rgb(235, 236, 239);font-size: 14px;font-family: Inter, -apple-system, BlinkMacSystemFont, "border: 0px solid;'><br></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="color: red; font-size: 12px; width: 600px; margin: 0 auto; text-align: center;">Created with <a href="https://wordtohtml.net/">WordToHTML.net</a> trial.</div>
+                   
+            </div>
+
+            <!-- 导航按钮 -->
+            <div class="navigation-buttons">
+                <a href="../index.html" class="nav-button">
+                    ← 返回目录
+                </a>
+                <a href="%E4%B8%81%E9%A6%99.html" class="nav-button">
+                    ← 上一个品种
+                </a>
+                <a href="%E4%BA%BA%E5%8F%82.html" class="nav-button">
+                    下一个品种 →
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../common.js"></script>
+    <script>
+        // 设置导航高亮
+        document.addEventListener('DOMContentLoaded', function() {
+            // 设置导航高亮
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                if (link.textContent.includes('药材饮片')) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

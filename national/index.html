@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国家中药饮片炮制规范 - 目录</title>
+    <link rel="stylesheet" href="../common.css">
+    <style>
+        /* 页面特有样式 */
+        main {
+            padding: 40px 30px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: #6c757d;
+            font-size: 16px;
+        }
+
+        /* 品种列表 */
+        .varieties-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .variety-item {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .variety-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: #6c757d;
+        }
+
+        .variety-name {
+            font-size: 18px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .variety-arrow {
+            color: #6c757d;
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .variety-item:hover .variety-arrow {
+            transform: translateX(5px);
+        }
+
+        /* 分页 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            gap: 10px;
+        }
+
+        .pagination button {
+            background: white;
+            border: 1px solid #e9ecef;
+            color: #6c757d;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background: #6c757d;
+            color: white;
+            border-color: #6c757d;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination button.active {
+            background: #2c3e50;
+            color: white;
+            border-color: #2c3e50;
+        }
+
+        .page-info {
+            color: #6c757d;
+            font-size: 14px;
+            margin: 0 10px;
+        }
+
+        /* 搜索框 */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #6c757d;
+            box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.1);
+        }
+
+        /* 返回按钮 */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #6c757d;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background: #2c3e50;
+            transform: translateY(-2px);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            main {
+                padding: 20px 15px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .page-subtitle {
+                font-size: 14px;
+            }
+
+            .variety-item {
+                padding: 15px;
+            }
+
+            .variety-name {
+                font-size: 16px;
+            }
+
+            .pagination {
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+
+            .pagination button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .page-info {
+                font-size: 12px;
+                margin: 0 5px;
+            }
+
+            .search-box {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../index.html" class="logo">中药炮规系统</a>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="../index.html">首页</a></li>
+                    <li><a href="../dfbz.html">药材饮片</a></li>
+                    <li><a href="#">查询系统</a></li>
+                    <li><a href="#">关于我们</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <a href="../dfbz.html" class="back-button">
+                ← 返回炮制规范目录
+            </a>
+
+            <div class="page-header">
+                <h1 class="page-title">国家中药饮片炮制规范</h1>
+                <p class="page-subtitle">共收录 <span id="totalCount">0</span> 个品种</p>
+            </div>
+
+            <div class="search-container">
+                <input type="text" class="search-box" id="searchBox" placeholder="搜索品种名称...">
+            </div>
+
+            <div class="varieties-container" id="varietiesContainer">
+                <!-- 品种列表将通过JavaScript动态生成 -->
+            </div>
+
+            <div class="pagination" id="pagination">
+                <!-- 分页按钮将通过JavaScript动态生成 -->
+            </div>
+        </main>
+    </div>
+
+    <script src="../common.js"></script>
+    <script>
+        // 品种数据
+        const varieties = [
+            '丁香', '南沙参', '人参', '三七', '大黄', '大青叶', '山药', '山茱萸', '川乌', '川芎',
+            '马钱子', '王不留行', '天麻', '天花粉', '木香', '木通', '牛蒡子', '牛膝', '丹参', '乌药',
+            '巴戟天', '玉竹', '甘草', '艾叶', '石斛', '石膏', '龙胆', '北沙参', '半夏', '生姜',
+            '白及', '白术', '白芍', '白芷', '白茅根', '白果', '白前', '白薇', '玄参', '瓜蒌',
+            '甘遂', '甘草', '艾叶', '石斛', '石膏', '龙胆', '北沙参', '半夏', '生姜', '白及',
+            '陈皮', '附子', '青皮', '青蒿', '苦杏仁', '苦参', '枇杷叶', '板蓝根', '郁金', '虎杖',
+            '昆布', '知母', '使君子', '金樱子', '鱼腥草', '狗脊', '泽泻', '细辛', '贯众', '荆芥',
+            '茜草', '草果', '茵陈', '茯苓', '胡黄连', '南沙参', '枳实', '枳壳', '柏子仁', '栀子',
+            '威灵仙', '厚朴', '砂仁', '轻粉', '鸦胆子', '韭菜子', '骨碎补', '钟乳石', '钩藤', '香附',
+            '香橼', '独活', '急性子', '姜黄', '前胡', '首乌藤', '洋金花', '穿心莲', '穿山甲', '络石藤',
+            '秦艽', '秦皮', '莱菔子', '莲子', '莲子心', '莪术', '荷叶', '桂枝', '桔梗', '桃仁',
+            '桑叶', '桑白皮', '桑枝', '桑螵蛸', '通草', '夏枯草', '柴胡', '党参', '射干', '徐长卿',
+            '高良姜', '浙贝母', '海马', '海龙', '海金沙', '海藻', '浮小麦', '通草', '预知子', '桑白皮',
+            '黄芪', '黄连', '黄柏', '黄精', '菊花', '常山', '蛇床子', '猪苓', '麻黄', '鹿衔草',
+            '商陆', '旋覆花', '续断', '斑蝥', '款冬花', '葛根', '葶苈子', '扁蓄', '硫黄', '雄黄',
+            '紫苏子', '紫苏梗', '紫花地丁', '紫草', '紫菀', '蛤蚧', '锁阳', '番泻叶', '滑石', '犀角',
+            '蒺藜', '蒲黄', '椿皮', '槐花', '雷丸', '蜈蚣', '蜂房', '路路通', '锦灯笼', '矮地茶',
+            '满山红', '槟榔', '酸枣仁', '蔓荆子', '罂粟壳', '辣椒', '蕤仁', '薏苡仁', '薄荷', '橘红',
+            '橘核', '僵蚕', '薤白', '覆盆子', '瞿麦', '蟾酥', '鳖甲', '麝香'
+        ];
+
+        let currentPage = 1;
+        const itemsPerPage = 10;
+        let filteredVarieties = [...varieties];
+
+        // 初始化页面
+        function initializePage() {
+            updateTotalCount();
+            renderVarieties();
+            renderPagination();
+        }
+
+        // 更新总数显示
+        function updateTotalCount() {
+            document.getElementById('totalCount').textContent = filteredVarieties.length;
+        }
+
+        // 渲染品种列表
+        function renderVarieties() {
+            const container = document.getElementById('varietiesContainer');
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageVarieties = filteredVarieties.slice(startIndex, endIndex);
+
+            container.innerHTML = pageVarieties.map(variety => `
+                <a href="variety/${encodeURIComponent(variety)}.html" class="variety-item">
+                    <span class="variety-name">${variety}</span>
+                    <span class="variety-arrow">→</span>
+                </a>
+            `).join('');
+        }
+
+        // 渲染分页
+        function renderPagination() {
+            const pagination = document.getElementById('pagination');
+            const totalPages = Math.ceil(filteredVarieties.length / itemsPerPage);
+
+            let paginationHTML = '';
+
+            // 上一页按钮
+            paginationHTML += `
+                <button onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                    上一页
+                </button>
+            `;
+
+            // 页码按钮
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+                    paginationHTML += `
+                        <button onclick="changePage(${i})" class="${i === currentPage ? 'active' : ''}">
+                            ${i}
+                        </button>
+                    `;
+                } else if (i === currentPage - 3 || i === currentPage + 3) {
+                    paginationHTML += '<span>...</span>';
+                }
+            }
+
+            // 下一页按钮
+            paginationHTML += `
+                <button onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                    下一页
+                </button>
+            `;
+
+            // 页面信息
+            paginationHTML += `
+                <span class="page-info">
+                    第 ${currentPage} 页，共 ${totalPages} 页
+                </span>
+            `;
+
+            pagination.innerHTML = paginationHTML;
+        }
+
+        // 切换页面
+        function changePage(page) {
+            const totalPages = Math.ceil(filteredVarieties.length / itemsPerPage);
+            if (page >= 1 && page <= totalPages) {
+                currentPage = page;
+                renderVarieties();
+                renderPagination();
+                // 滚动到顶部
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // 搜索功能
+        function handleSearch() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                filteredVarieties = [...varieties];
+            } else {
+                filteredVarieties = varieties.filter(variety => 
+                    variety.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            currentPage = 1;
+            updateTotalCount();
+            renderVarieties();
+            renderPagination();
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePage();
+
+            // 绑定搜索事件
+            const searchBox = document.getElementById('searchBox');
+            searchBox.addEventListener('input', handleSearch);
+            searchBox.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    handleSearch();
+                }
+            });
+
+            // 设置导航高亮
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                if (link.textContent.includes('药材饮片')) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

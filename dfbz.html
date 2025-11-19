@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中药饮片炮制规范目录</title>
+    <link rel="stylesheet" href="common.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 1020px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        /* 导航栏样式 */
+        header {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #2c3e50;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            height: 60px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: auto;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: #f8f9fa;
+            color: #2c3e50;
+        }
+
+        /* 主要内容区域 */
+        main {
+            padding: 40px 30px;
+        }
+
+        .page-title {
+            text-align: left;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* 地区选择器 */
+        .region-selector {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e9ecef;
+        }
+
+        .region-selector-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .region-selector h3 {
+            color: #2c3e50;
+            margin: 0;
+            font-size: 18px;
+            white-space: nowrap;
+        }
+
+        /* 下拉筛选器样式 */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .dropdown-button {
+            background: white;
+            border: 2px solid #6c757d;
+            color: #6c757d;
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-button:hover {
+            background: #6c757d;
+            color: white;
+        }
+
+        .dropdown-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 1000;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .dropdown-close-button {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            color: #666;
+            z-index: 1001;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .dropdown.active .dropdown-close-button {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dropdown-close-button:hover {
+            background: #f5f5f5;
+            color: #333;
+            transform: scale(1.1);
+        }
+
+        .dropdown-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #333;
+            font-weight: 500;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+        }
+
+        .dropdown-item:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .dropdown-item:last-child {
+            border-radius: 0 0 8px 8px;
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+
+        /* 规范网格布局 */
+        .standards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        /* 地区分组 */
+        .region-group {
+            margin-bottom: 40px;
+        }
+
+        .region-title {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #6c757d;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .region-code {
+            background: #6c757d;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .region-group.national .region-code {
+            background: #dc3545;
+        }
+
+        .region-group.national .region-title {
+            border-bottom-color: #dc3545;
+        }
+
+        /* 规范卡片 */
+        .standard-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .standard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .standard-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.3;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: #2c3e50;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 加载动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .standard-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .standard-card:nth-child(1) { animation-delay: 0.1s; }
+        .standard-card:nth-child(2) { animation-delay: 0.2s; }
+        .standard-card:nth-child(3) { animation-delay: 0.3s; }
+        .standard-card:nth-child(4) { animation-delay: 0.4s; }
+        .standard-card:nth-child(5) { animation-delay: 0.5s; }
+        .standard-card:nth-child(6) { animation-delay: 0.6s; }
+
+        /* dfbz页面响应式样式 */
+        @media (max-width: 768px) {
+            main {
+                padding: 20px 15px;
+            }
+
+            /* 地区选择器响应式 */
+            .region-selector-content {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+
+            .region-selector h3 {
+                font-size: 16px;
+                text-align: center;
+            }
+
+            .dropdown {
+                max-width: 100%;
+            }
+
+            .dropdown-button {
+                padding: 15px;
+                font-size: 16px;
+            }
+
+            /* 卡片网格响应式 */
+            .standards-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin-top: 20px;
+            }
+
+            .region-title {
+                font-size: 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .region-code {
+                font-size: 14px;
+            }
+
+            .standard-card {
+                padding: 15px;
+            }
+
+            .standard-name {
+                font-size: 13px;
+            }
+
+            /* 页面标题响应式 */
+            .page-title {
+                font-size: 14px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="index.html" class="logo">中药炮规系统</a>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="dfbz.html">药材饮片</a></li>
+                    <li><a href="#">查询系统</a></li>
+                    <li><a href="#">关于我们</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <p class="page-title">中药材和饮片标准</p>
+
+            <div class="region-selector">
+                <div class="region-selector-content">
+                    <h3>快速跳转到地区</h3>
+                    <div class="dropdown" id="regionDropdown">
+                        <button class="dropdown-button" onclick="toggleDropdown()">
+                            <span id="selectedRegion">选择地区</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="dropdown-content">
+                            <!-- 动态生成下拉菜单选项 -->
+                        </div>
+                        <div class="dropdown-close-button" onclick="closeDropdown(event)">×</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 地区卡片将通过JavaScript动态生成 -->
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        ↑
+    </div>
+
+    <!-- 引入外部文件 -->
+    <script src="data.js"></script>
+    <script src="common.js"></script>
+
+    <script>
+        // 切换下拉菜单
+        function toggleDropdown() {
+            const dropdown = document.getElementById('regionDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        // 关闭下拉菜单
+        function closeDropdown(event) {
+            event.stopPropagation();
+            const dropdown = document.getElementById('regionDropdown');
+            dropdown.classList.remove('active');
+        }
+
+        // 点击外部关闭下拉菜单
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('regionDropdown');
+            if (!dropdown.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // 跳转到指定地区
+        function scrollToRegion(regionId) {
+            const element = document.getElementById(regionId);
+            if (element) {
+                const offset = 100; // 导航栏高度偏移
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+
+                // 更新下拉菜单显示文本
+                const region = regionsData[regionId];
+                if (region) {
+                    document.getElementById('selectedRegion').textContent = region.displayName;
+                }
+                
+                // 关闭下拉菜单
+                document.getElementById('regionDropdown').classList.remove('active');
+
+                // 高亮效果
+                element.style.transform = 'scale(1.02)';
+                element.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                
+                setTimeout(() => {
+                    element.style.transform = '';
+                    element.style.boxShadow = '';
+                }, 1000);
+            }
+        }
+
+        // 返回顶部函数
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 监听滚动显示/隐藏返回顶部按钮
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // 页面加载完成后的动画
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化页面
+            initializePage();
+            
+            // 为标准卡片添加渐入动画
+            const standardCards = document.querySelectorAll('.standard-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            standardCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        });
+
+        // 添加键盘快捷键支持
+        document.addEventListener('keydown', function(e) {
+            // Ctrl + Home 返回顶部
+            if (e.ctrlKey && e.key === 'Home') {
+                e.preventDefault();
+                scrollToTop();
+            }
+            // ESC 关闭下拉菜单和移动端菜单
+            if (e.key === 'Escape') {
+                document.getElementById('regionDropdown').classList.remove('active');
+                if (window.innerWidth <= 768) {
+                    closeMobileMenu();
+                }
+            }
+        });
+
+        // 动态生成地区卡片
+        function generateRegionCards() {
+            const main = document.querySelector('main');
+            const existingRegions = main.querySelectorAll('.region-group');
+            
+            // 清除现有的地区卡片（保留第一个h1标题和region-selector）
+            existingRegions.forEach(region => region.remove());
+            
+            // 为每个地区生成卡片
+            Object.keys(regionsData).forEach(regionId => {
+                const region = regionsData[regionId];
+                const regionGroup = document.createElement('div');
+                regionGroup.className = `region-group ${regionId === 'national' ? 'national' : ''}`;
+                regionGroup.id = regionId;
+                
+                regionGroup.innerHTML = `
+                    <h2 class="region-title">
+                        <span class="region-code">${region.code}</span>
+                        ${region.name}
+                    </h2>
+                    <div class="standards-grid">
+                        ${region.standards.map(standard => `
+                            <a href="${regionId === 'national' ? 'national/index.html' : '#'}" class="standard-card" onclick="handleCardClick(event, '${regionId}', '${standard}')">
+                                <div class="standard-name">${standard}</div>
+                            </a>
+                        `).join('')}
+                    </div>
+                `;
+                
+                main.appendChild(regionGroup);
+            });
+        }
+
+        // 动态生成下拉菜单选项
+        function generateDropdownOptions() {
+            const dropdownContent = document.querySelector('.dropdown-content');
+            dropdownContent.innerHTML = '';
+            
+            Object.keys(regionsData).forEach(regionId => {
+                const region = regionsData[regionId];
+                const item = document.createElement('div');
+                item.className = 'dropdown-item';
+                item.textContent = region.dropdownName;
+                item.onclick = () => scrollToRegion(regionId);
+                dropdownContent.appendChild(item);
+            });
+        }
+
+        // 处理卡片点击事件
+        function handleCardClick(event, regionId, standard) {
+            event.preventDefault();
+            
+            if (regionId === 'national') {
+                // 国家中药饮片炮制规范，跳转到目录页面
+                window.location.href = 'national/index.html';
+            } else {
+                // 其他地区暂时显示提示信息
+                alert(`您点击了：${standard}\n该地区的详细页面正在开发中，敬请期待！`);
+            }
+        }
+
+        // 初始化页面
+        function initializePage() {
+            generateRegionCards();
+            generateDropdownOptions();
+        }
+    </script>
+</body>
+</html>
